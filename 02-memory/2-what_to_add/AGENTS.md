@@ -72,3 +72,7 @@ PostgreSQL (Supabase Postgres 17.6) with **pgvector** extension. Schema `dishes.
 - ESLint with `eslint-config-codely` (course preset) + Next.js plugin
 - `@typescript-eslint/explicit-function-return-type: error` — all `.ts` functions require explicit return types
 - TypeScript strict mode with decorators enabled
+
+## Commits
+
+Use Conventional Commits with the lesson as scope: `type(02-2): description`.

@@ -23,11 +23,11 @@ const DishSchema = z.object({
 export class AiSdkMinistral3DishByIngredientsSuggesterGateway implements DishByIngredientsSuggesterGateway {
 	private readonly model;
 
-	constructor(baseUrl: string, apiKey: string) {
+	constructor(baseUrl: string, apiKey: string, modelName = "ministral-3:3b") {
 		this.model = createOpenAI({
 			baseURL: baseUrl,
 			apiKey,
-		})("ministral-3:3b");
+		})(modelName);
 	}
 
 	async suggest(

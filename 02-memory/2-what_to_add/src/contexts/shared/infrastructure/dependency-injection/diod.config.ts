@@ -21,16 +21,28 @@ import { PostgresConnection } from "../postgres/PostgresConnection";
 
 const builder = new ContainerBuilder();
 
+const postgresHost = process.env.POSTGRES_HOST ?? "localhost";
+const postgresPort = Number(process.env.POSTGRES_PORT ?? "5432");
+const postgresUser = process.env.POSTGRES_USER ?? "supabase_admin";
+const postgresPassword = process.env.POSTGRES_PASSWORD ?? "c0d3ly7v";
+const postgresDatabase = process.env.POSTGRES_DB ?? "postgres";
+const ollamaBaseUrl =
+	process.env.OLLAMA_BASE_URL ?? "http://localhost:11434/v1";
+const ollamaApiKey = process.env.OLLAMA_API_KEY ?? "ollama";
+const ollamaChatModel = process.env.OLLAMA_CHAT_MODEL ?? "ministral-3:3b";
+const ollamaEmbeddingModel =
+	process.env.OLLAMA_EMBEDDING_MODEL ?? "qwen3-embedding:0.6b";
+
 // Shared
 builder
 	.register(PostgresConnection)
 	.useFactory(() => {
 		return new PostgresConnection(
-			"localhost",
-			5432,
-			"supabase_admin",
-			"c0d3ly7v",
-			"postgres",
+			postgresHost,
+			postgresPort,
+			postgresUser,
+			postgresPassword,
+			postgresDatabase,
 		);
 	})
 	.asSingleton();
@@ -41,9 +53,9 @@ builder
 	.useFactory(
 		() =>
 			new AiSdkEmbeddingsGenerator(
-				"http://localhost:11434/v1",
-				"ollama",
-				"qwen3-embedding:0.6b",
+				ollamaBaseUrl,
+				ollamaApiKey,
+				ollamaEmbeddingModel,
 			),
 	);
 builder.registerAndUse(InMemoryEventBus).asSingleton();
@@ -59,8 +71,9 @@ builder
 	.useFactory(
 		() =>
 			new AiSdkMinistral3DishByIngredientsSuggesterGateway(
-				"http://localhost:11434/v1",
-				"ollama",
+				ollamaBaseUrl,
+				ollamaApiKey,
+				ollamaChatModel,
 			),
 	);
 

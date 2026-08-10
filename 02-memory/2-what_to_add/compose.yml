@@ -1,4 +1,27 @@
 services:
+  app:
+    build:
+      context: .
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: supabase_admin
+      POSTGRES_PASSWORD: c0d3ly7v
+      POSTGRES_DB: postgres
+      OLLAMA_BASE_URL: http://ollama:11434/v1
+      OLLAMA_API_KEY: ollama
+      OLLAMA_CHAT_MODEL: ministral-3:3b
+      OLLAMA_EMBEDDING_MODEL: qwen3-embedding:0.6b
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ollama-models:
+        condition: service_completed_successfully
+
   postgres:
     image: supabase/postgres:17.6.1.008
     restart: unless-stopped
@@ -9,4 +32,43 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./databases:/docker-entrypoint-initdb.d
+      - postgres-data:/var/lib/postgresql/data
+      - ./databases:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U supabase_admin -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  ollama:
+    image: ollama/ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  ollama-models:
+    image: ollama/ollama
+    restart: "no"
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+      OLLAMA_CHAT_MODEL: ministral-3:3b
+      OLLAMA_EMBEDDING_MODEL: qwen3-embedding:0.6b
+    volumes:
+      - ./docker/ollama-init.sh:/scripts/ollama-init.sh:ro
+    entrypoint: ["/bin/sh", "/scripts/ollama-init.sh"]
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+volumes:
+  postgres-data:
+  ollama-data:
