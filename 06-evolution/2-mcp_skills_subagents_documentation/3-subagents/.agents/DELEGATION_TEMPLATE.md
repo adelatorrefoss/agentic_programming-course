@@ -34,7 +34,7 @@ Shared contracts must be explicit before parallel work begins:
 - Agent output references:
 - Implementation commit:
 - PR code review commit range:
-- Code review agent result:
+- `/review` result:
 - Remediation commit (`code-review:`):
 - Post-remediation validation commands and results:
 - Harness retro report:

@@ -32,8 +32,9 @@ definition whose tools differ from its matrix entry.
   ownership, input/output contracts, dependency order, and stop conditions.
 - Keep database, backend, and testing responsibilities separate.
 - Ask the main agent to review the integrated diff, not only isolated agent results.
-- Create the implementation commit before invoking `code-review`. Treat the
-  review as a PR review of that commit, not as a pre-commit lint step.
+- Create the implementation commit before invoking the native `/review`
+  command. Treat it as a PR review of that commit, not as a pre-commit lint
+  step.
 - Apply all accepted review changes in a second commit and record the review
   result and remediation commit in the task coordination record.
 - Persist one coordination record per multi-agent task under
@@ -54,7 +55,7 @@ The agent may update that TODO file, but it must not modify production code or C
 2. Delegate bounded implementation work.
 3. Integrate and validate the complete diff.
 4. Commit the implementation and open or identify the PR commit range.
-5. Execute `code-review` as the PR review of the implementation commit.
+5. Execute `/review` as the PR review of the implementation commit.
 6. Apply accepted findings and commit the remediation changes with a message
    starting with `code-review:`.
 7. Run the required project checks after remediation.
