@@ -2,6 +2,7 @@
 set -euo pipefail
 
 AGENT_DIR="${1:-.agents/agents}"
+MATRIX_FILE="${AGENT_TOOL_MATRIX:-.agents/agent-tool-matrix.conf}"
 allowed_tools="read search edit execute todo"
 agent_count=0
 failure_count=0
@@ -9,6 +10,11 @@ declare -A agent_names=()
 
 if [[ ! -d "$AGENT_DIR" ]]; then
 	echo "Agent directory not found: ${AGENT_DIR}" >&2
+	exit 1
+fi
+
+if [[ ! -f "$MATRIX_FILE" ]]; then
+	echo "Agent tool matrix not found: ${MATRIX_FILE}" >&2
 	exit 1
 fi
 
@@ -47,6 +53,35 @@ validate_tools() {
 	done
 }
 
+normalize_tools() {
+	printf '%s\n' "$1" | tr ',' ' ' | tr ' ' '\n' | sed '/^$/d' | sort | tr '\n' ' '
+}
+
+validate_role_tool_matrix() {
+	local file="$1"
+	local agent_key="$2"
+	local declared_tools="$3"
+	local expected_tools
+
+	expected_tools="$(
+		awk -F'|' -v role="$agent_key" '
+			$0 !~ /^[[:space:]]*#/ && $1 == role { print $2; exit }
+		' "$MATRIX_FILE"
+	)"
+
+	if [[ -z "$expected_tools" ]]; then
+		echo "${file}: no tool matrix entry for role '${agent_key}'" >&2
+		return 1
+	fi
+
+	if [[ "$(normalize_tools "$declared_tools")" != "$(normalize_tools "$expected_tools")" ]]; then
+		echo "${file}: tools do not match ${MATRIX_FILE} for role '${agent_key}'" >&2
+		echo "    expected: ${expected_tools}" >&2
+		echo "    declared: ${declared_tools}" >&2
+		return 1
+	fi
+}
+
 for file in "$AGENT_DIR"/*.md; do
 	[[ -f "$file" ]] || continue
 	agent_count=$((agent_count + 1))
@@ -76,6 +111,14 @@ for file in "$AGENT_DIR"/*.md; do
 	fi
 
 	name="$(printf '%s\n' "$frontmatter" | sed -n 's/^name:[[:space:]]*//p' | head -n 1)"
+	agent_key="$(printf '%s' "$name" | tr '[:upper:] ' '[:lower:]-')"
+	tools_line="$(printf '%s\n' "$frontmatter" | grep -E '^tools:[[:space:]]*\[[^]]*\][[:space:]]*$' || true)"
+	declared_tools="${tools_line#*[}"
+	declared_tools="${declared_tools%]*}"
+	if ! validate_role_tool_matrix "$file" "$agent_key" "$declared_tools"; then
+		file_error=true
+	fi
+
 	if [[ -n "${agent_names[$name]:-}" ]]; then
 		echo "${file}: duplicate agent name '${name}'" >&2
 		file_error=true

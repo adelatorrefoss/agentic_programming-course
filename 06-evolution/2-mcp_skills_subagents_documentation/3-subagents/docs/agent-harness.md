@@ -21,12 +21,21 @@ npm run agents:validate
 
 The validator requires `name`, `description`, and `tools` frontmatter, checks declared tools against the supported tool set, rejects duplicate agent names, and requires role documentation headings in the body.
 
+The least-privilege role matrix is maintained in
+`.agents/agent-tool-matrix.conf`; `npm run agents:validate` rejects a
+definition whose tools differ from its matrix entry.
+
 ## Coordination best practices
 
 - Define shared contracts before starting parallel work.
-- Give each delegated agent a bounded objective, ownership, and stop condition.
+- Start each delegation from `.agents/DELEGATION_TEMPLATE.md`, including named
+  ownership, input/output contracts, dependency order, and stop conditions.
 - Keep database, backend, and testing responsibilities separate.
 - Ask the main agent to review the integrated diff, not only isolated agent results.
+- Execute `code-review` after implementation and before committing. The review
+  must record findings or explicit approval in the task coordination record.
+- Persist one coordination record per multi-agent task under
+  `.agents/coordination/`.
 - Preserve existing user changes and avoid unrelated production edits.
 - Record agent-harness recommendations in `TODO-AGENT-HARNESS.md`.
 - Record test infrastructure recommendations in `TODO-TEST-INFRASTRUCTURE.md`.
@@ -36,3 +45,12 @@ The validator requires `name`, `description`, and `tools` frontmatter, checks de
 `.agents/agents/harness-retro.agent.md` handles post-run retrospectives for agent harness configuration. Agent-harness recommendations are persisted in `TODO-AGENT-HARNESS.md`.
 
 The agent may update that TODO file, but it must not modify production code or CI configuration unless explicitly authorized.
+
+## Development cycle gate
+
+1. Define contracts and the delegation brief.
+2. Delegate bounded implementation work.
+3. Integrate and validate the complete diff.
+4. Execute `code-review` and resolve or record its findings.
+5. Run the required project checks.
+6. Execute `harness-retro`, update the harness TODO register, and commit.
