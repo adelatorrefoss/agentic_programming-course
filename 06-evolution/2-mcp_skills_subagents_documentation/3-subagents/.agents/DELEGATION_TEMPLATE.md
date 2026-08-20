@@ -32,7 +32,11 @@ Shared contracts must be explicit before parallel work begins:
 ## Integration handoff
 
 - Agent output references:
-- Integrated diff reviewed by:
+- Implementation commit:
+- PR code review commit range:
 - Code review agent result:
-- Validation commands and results:
+- Remediation commit:
+- Post-remediation validation commands and results:
+- Harness retro report:
+- Harness retro commit:
 - Final sign-off:

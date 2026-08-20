@@ -32,12 +32,20 @@ Shared contracts:
 ## Integration handoff
 
 - Agent output references: `7c03246`, the prior harness-retro report, and the
-  final pre-commit code-review report from this task.
-- Integrated diff reviewed by: main agent.
+  final code-review report from this task.
+- Implementation commit: `67c2c73`.
+- PR code review commit range: historical task review occurred before this
+  post-commit gate was introduced; new tasks must review the implementation
+  commit after it is created.
 - Code review agent result: initial findings were fixed; final review result was
   `APPROVED` with no significant issues.
-- Validation commands: `npm run agents:validate` (passed, 6 definitions);
-  `npm run lint -- --no-fix` (passed);
+- Remediation commit: none for the historical task.
+- Post-remediation validation commands: `npm run agents:validate` (passed, 6
+  definitions); `npm run lint -- --no-fix` (passed);
   `bash -n scripts/agent-harness/validate-agent-config.sh` (passed);
   `git diff --check` (passed).
-- Final sign-off: main agent, approved for commit.
+- Harness retro report: prior harness-retro report persisted in
+  `TODO-AGENT-HARNESS.md`.
+- Harness retro commit: `7c03246`.
+- Final sign-off: main agent, approved for the historical task; the new cycle
+  gate applies to subsequent tasks.
