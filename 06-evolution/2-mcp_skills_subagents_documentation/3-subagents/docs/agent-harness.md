@@ -47,7 +47,7 @@ Replace `TASK-XXX` with the actual task identifier, such as `TASK-002`.
 - Define shared contracts before starting parallel work.
 - Start each delegation from `.agents/DELEGATION_TEMPLATE.md`, including named
   ownership, input/output contracts, dependency order, and stop conditions.
-- Keep database, backend, and testing responsibilities separate.
+- Keep frontend, database, backend, and testing responsibilities separate.
 - Ask the main agent to review the integrated diff, not only isolated agent results.
 - Create the implementation commit before invoking the native `/review`
   command. Treat it as a PR review of that commit, not as a pre-commit lint
@@ -69,7 +69,9 @@ The agent may update that TODO file, but it must not modify production code or C
 ## Development cycle gate
 
 1. Define contracts and the delegation brief.
-2. Delegate bounded implementation work.
+2. Delegate bounded implementation work, invoking `frontend-engineer` for UI,
+   React, or Next.js App Router changes alongside the other relevant role
+   agents.
 3. Integrate and validate the complete diff.
 4. Commit the implementation and open or identify the PR commit range.
 5. Execute `/review` as the PR review of the implementation commit.
