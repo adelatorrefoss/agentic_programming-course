@@ -30,17 +30,17 @@ definition whose tools differ from its matrix entry.
 Every task commit must include its task identifier in the subject:
 
 ```text
-feat TASK_XXX: describe the implementation
+feat(TASK-XXX): describe the implementation
 ```
 
 Use the matching phase prefix for follow-up commits:
 
 ```text
-code-review TASK_XXX: apply PR review findings
-chore TASK_XXX: record harness retro
+fix(TASK-XXX): apply PR review findings
+chore(TASK-XXX): record harness retro
 ```
 
-Replace `TASK_XXX` with the actual task identifier, such as `TASK_002`.
+Replace `TASK-XXX` with the actual task identifier, such as `TASK-002`.
 
 ## Coordination best practices
 

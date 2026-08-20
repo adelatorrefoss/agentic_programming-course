@@ -20,8 +20,8 @@ npm run test
 Include the task identifier in every commit subject:
 
 ```text
-feat TASK_XXX: describe the implementation
+feat(TASK-XXX): describe the implementation
 ```
 
-Use `code-review TASK_XXX: ...` for commits applying `/review` findings and
-`chore TASK_XXX: ...` for the final harness retrospective.
+Use `fix(TASK-XXX): ...` for commits applying `/review` findings and
+`chore(TASK-XXX): ...` for the final harness retrospective.

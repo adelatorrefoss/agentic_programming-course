@@ -13,8 +13,8 @@ The record is the handoff contract for the task. It must preserve:
 - post-remediation validation, harness-retro report, and final sign-off.
 
 Commit subjects must include the task identifier, for example
-`feat TASK_002: add weekly meal planning`. Use `code-review TASK_002: ...` for
-review remediation and `chore TASK_002: ...` for the retro commit.
+`feat(TASK-002): add weekly meal planning`. Use `fix(TASK-002): ...` for review
+remediation and `chore(TASK-002): ...` for the retro commit.
 
 Records are part of the agent harness, not test infrastructure. Do not store
 secrets or credentials in them.

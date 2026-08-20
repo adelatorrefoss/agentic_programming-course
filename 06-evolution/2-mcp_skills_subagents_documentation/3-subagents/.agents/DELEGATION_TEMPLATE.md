@@ -6,7 +6,7 @@ coordination record and complete every section before starting implementation.
 ## Objective
 
 - Task:
-- Task identifier (`TASK_XXX`):
+- Task identifier (`TASK-XXX`):
 - Expected outcome:
 - Scope boundaries:
 
@@ -32,15 +32,15 @@ Shared contracts must be explicit before parallel work begins:
 
 ## Integration handoff
 
-- Implementation commit subject: `feat TASK_XXX: ...`
+- Implementation commit subject: `feat(TASK-XXX): ...`
 - Agent output references:
 - Implementation commit:
 - PR code review commit range:
 - `/review` result:
-- Remediation commit subject: `code-review TASK_XXX: ...`
+- Remediation commit subject: `fix(TASK-XXX): ...`
 - Remediation commit:
 - Post-remediation validation commands and results:
 - Harness retro report:
-- Harness retro commit subject: `chore TASK_XXX: ...`
+- Harness retro commit subject: `chore(TASK-XXX): ...`
 - Harness retro commit:
 - Final sign-off:
