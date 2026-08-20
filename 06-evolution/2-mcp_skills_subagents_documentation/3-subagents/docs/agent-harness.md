@@ -13,6 +13,14 @@ Agent definitions live in `.agents/agents/`. Each definition should declare:
 
 Skills live in `.agents/skills/` and should be focused on a repeatable workflow rather than a project role.
 
+Validate all agent definitions locally with:
+
+```bash
+npm run agents:validate
+```
+
+The validator requires `name`, `description`, and `tools` frontmatter, checks declared tools against the supported tool set, rejects duplicate agent names, and requires role documentation headings in the body.
+
 ## Coordination best practices
 
 - Define shared contracts before starting parallel work.

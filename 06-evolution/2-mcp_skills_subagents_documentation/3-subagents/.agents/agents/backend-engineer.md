@@ -1,6 +1,7 @@
 ---
 name: backend-engineer
 description: "Use when creating or modifying backend code: API routes, use cases, domain models, repositories, infrastructure services, or dependency injection configuration. Follows Hexagonal Architecture, DDD, and DIOD conventions."
+tools: [read, search, edit, execute, todo]
 color: red
 ---
 

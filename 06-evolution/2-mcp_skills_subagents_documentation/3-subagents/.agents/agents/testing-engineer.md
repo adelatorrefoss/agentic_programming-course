@@ -1,6 +1,7 @@
 ---
 name: testing-engineer
 description: "Use when creating or modifying tests: unit tests, Object Mothers for test data, or hand-written Mock Objects for domain interfaces. Follows the project's testing conventions with jest, should* pattern mocks, and faker-based mothers."
+tools: [read, search, edit, execute, todo]
 color: yellow
 ---
 

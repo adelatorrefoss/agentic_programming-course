@@ -1,6 +1,7 @@
 ---
 name: database-engineer
 description: "Use when creating or modifying database schemas, migrations, or SQL scripts. Follows PostgreSQL conventions: NOT NULL for required fields, plural table naming, and TEXT with CHECK constraints over VARCHAR/CHAR."
+tools: [read, search, edit, execute, todo]
 color: purple
 ---
 

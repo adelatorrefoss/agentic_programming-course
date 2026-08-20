@@ -5,6 +5,7 @@ npm prep          # lint + build + test
 docker compose up # start database
 npm run dev       # local dev server (not Docker)
 npm run lint:fix
+npm run agents:validate
 npm run test
 ```
 

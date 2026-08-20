@@ -11,6 +11,7 @@
 		"test": "jest --testPathIgnorePatterns=.*\\.ci\\.test\\.ts$",
 		"test:ci": "jest --testMatch '**/*.ci.test.ts'",
 		"prep": "npm run harness:check && npm run lint:fix && npm run build && npm run test",
+		"agents:validate": "bash scripts/agent-harness/validate-agent-config.sh",
 		"harness:check": "bash scripts/harness/check-services.sh",
 		"harness:ollama:check": "bash scripts/harness/ollama-healthcheck.sh",
 		"harness:ollama:prepare": "bash scripts/harness/ollama-prepare.sh",
