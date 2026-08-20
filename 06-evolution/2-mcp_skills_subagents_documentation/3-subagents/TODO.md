@@ -48,17 +48,17 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 
 ### Alcance
 
-- [ ] Diseñar la persistencia de planes semanales y sus comidas.
-- [ ] Garantizar que un día y franja (`breakfast`, `lunch`, `dinner`) tengan como máximo un plato.
-- [ ] Modelar `WeeklyMealPlan`, sus identificadores y reglas de negocio.
-- [ ] Crear casos de uso para crear un plan y asignar, sustituir o retirar un plato.
-- [ ] Crear un caso de uso que agrupe ingredientes repetidos en una lista de la compra.
-- [ ] Exponer rutas API para crear, consultar y modificar el plan.
-- [ ] Resolver todas las dependencias mediante DIOD.
-- [ ] Añadir tests de reglas, casos de uso, errores y persistencia.
-- [ ] Comprobar concurrencia al asignar dos platos a la misma franja.
-- [ ] Verificar que las rutas solo coordinan entrada, caso de uso y respuesta HTTP.
-- [ ] Verificar lint, build y tests con `npm prep`.
+- [x] Diseñar la persistencia de planes semanales y sus comidas.
+- [x] Garantizar que un día y franja (`breakfast`, `lunch`, `dinner`) tengan como máximo un plato.
+- [x] Modelar `WeeklyMealPlan`, sus identificadores y reglas de negocio.
+- [x] Crear casos de uso para crear un plan y asignar, sustituir o retirar un plato.
+- [x] Crear un caso de uso que agrupe ingredientes repetidos en una lista de la compra.
+- [x] Exponer rutas API para crear, consultar y modificar el plan.
+- [x] Resolver todas las dependencias mediante DIOD.
+- [x] Añadir tests de reglas, casos de uso, errores y persistencia.
+- [x] Comprobar concurrencia al asignar dos platos a la misma franja.
+- [x] Verificar que las rutas solo coordinan entrada, caso de uso y respuesta HTTP.
+- [x] Verificar lint, build y tests con `npm prep`.
 
 ### Reparto recomendado
 

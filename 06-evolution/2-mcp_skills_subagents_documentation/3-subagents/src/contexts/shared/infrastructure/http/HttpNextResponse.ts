@@ -36,8 +36,12 @@ export class HttpNextResponse {
 		);
 	}
 
-	static created(): NextResponse {
-		return new NextResponse(null, { status: 201 });
+	static created<JsonBody>(data?: JsonBody): NextResponse {
+		if (data === undefined) {
+			return new NextResponse(null, { status: 201 });
+		}
+
+		return NextResponse.json(data, { status: 201 });
 	}
 
 	static ok<JsonBody>(data: JsonBody): NextResponse {

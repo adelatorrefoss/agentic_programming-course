@@ -15,6 +15,14 @@ import { PostgresCookedDishRepository } from "../../../dishes/cooked-dishes/infr
 import { DishByIngredientsSuggester } from "../../../dishes/dishes/application/suggest/DishByIngredientsSuggester";
 import { DishByIngredientsSuggesterGateway } from "../../../dishes/dishes/domain/DishByIngredientsSuggesterGateway";
 import { AiSdkMinistral3DishByIngredientsSuggesterGateway } from "../../../dishes/dishes/infraestructure/AiSdkMinistral3DishByIngredientsSuggesterGateway";
+import { WeeklyMealPlanMealAssigner } from "../../../dishes/meal-plans/application/assign-meal/WeeklyMealPlanMealAssigner";
+import { WeeklyMealPlanCreator } from "../../../dishes/meal-plans/application/create/WeeklyMealPlanCreator";
+import { WeeklyMealPlanMealRemover } from "../../../dishes/meal-plans/application/remove-meal/WeeklyMealPlanMealRemover";
+import { WeeklyMealPlanMealReplacer } from "../../../dishes/meal-plans/application/replace-meal/WeeklyMealPlanMealReplacer";
+import { WeeklyMealPlanSearcher } from "../../../dishes/meal-plans/application/search-by-id/WeeklyMealPlanSearcher";
+import { WeeklyMealPlanShoppingListGenerator } from "../../../dishes/meal-plans/application/shopping-list/WeeklyMealPlanShoppingListGenerator";
+import { WeeklyMealPlanRepository } from "../../../dishes/meal-plans/domain/WeeklyMealPlanRepository";
+import { PostgresWeeklyMealPlanRepository } from "../../../dishes/meal-plans/infrastructure/PostgresWeeklyMealPlanRepository";
 import { EmbeddingsGenerator } from "../../domain/EmbeddingsGenerator";
 import { EventBus } from "../../domain/event/EventBus";
 import { UuidGenerator } from "../../domain/UuidGenerator";
@@ -77,6 +85,18 @@ builder.registerAndUse(CookedDishCreator);
 builder.registerAndUse(AllCookedDishesSearcher);
 builder.registerAndUse(CookedDishByIdSearcher);
 builder.registerAndUse(CookedDishesBySimilarIngredientsSearcher);
+
+// WeeklyMealPlan
+builder
+	.register(WeeklyMealPlanRepository)
+	.use(PostgresWeeklyMealPlanRepository);
+builder.registerAndUse(PostgresWeeklyMealPlanRepository);
+builder.registerAndUse(WeeklyMealPlanCreator);
+builder.registerAndUse(WeeklyMealPlanSearcher);
+builder.registerAndUse(WeeklyMealPlanMealAssigner);
+builder.registerAndUse(WeeklyMealPlanMealReplacer);
+builder.registerAndUse(WeeklyMealPlanMealRemover);
+builder.registerAndUse(WeeklyMealPlanShoppingListGenerator);
 
 // CookedDishRating
 builder
