@@ -10,7 +10,11 @@
 		"lint:fix": "eslint . --fix",
 		"test": "jest --testPathIgnorePatterns=.*\\.ci\\.test\\.ts$",
 		"test:ci": "jest --testMatch '**/*.ci.test.ts'",
-		"prep": "npm run lint:fix && npm run build && npm run test",
+		"prep": "npm run harness:check && npm run lint:fix && npm run build && npm run test",
+		"harness:check": "bash scripts/harness/check-services.sh",
+		"harness:ollama:check": "bash scripts/harness/ollama-healthcheck.sh",
+		"harness:ollama:prepare": "bash scripts/harness/ollama-prepare.sh",
+		"harness:ollama:prepare:no-cache": "bash scripts/harness/ollama-prepare.sh --no-cache",
 		"checks": "npm run lint:fix && npm run build && npm run test"
 	},
 	"dependencies": {
