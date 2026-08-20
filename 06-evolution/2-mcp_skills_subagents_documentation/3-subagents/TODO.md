@@ -17,19 +17,19 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 
 ### Alcance
 
-- [ ] Crear una tabla de valoraciones asociada a `cooked_dishes`.
-- [ ] Guardar autor, puntuación de 1 a 5, comentario y fecha de creación.
-- [ ] Impedir más de una valoración del mismo autor para un mismo plato.
-- [ ] Modelar la valoración y sus invariantes en el dominio.
-- [ ] Crear un caso de uso para añadir una valoración.
-- [ ] Crear un caso de uso para obtener el resumen de valoraciones de un plato.
-- [ ] Exponer `POST /api/cooked-dishes/:uuid/ratings`.
-- [ ] Exponer `GET /api/cooked-dishes/:uuid/ratings` con media, total y distribución.
-- [ ] Registrar repositorios y casos de uso en DIOD.
-- [ ] Añadir tests unitarios del dominio y los casos de uso.
-- [ ] Añadir tests de integración del repositorio PostgreSQL.
-- [ ] Cubrir errores: plato inexistente, puntuación inválida y valoración duplicada.
-- [ ] Verificar lint, build y tests con `npm prep`.
+- [x] Crear una tabla de valoraciones asociada a `cooked_dishes`.
+- [x] Guardar autor, puntuación de 1 a 5, comentario y fecha de creación.
+- [x] Impedir más de una valoración del mismo autor para un mismo plato.
+- [x] Modelar la valoración y sus invariantes en el dominio.
+- [x] Crear un caso de uso para añadir una valoración.
+- [x] Crear un caso de uso para obtener el resumen de valoraciones de un plato.
+- [x] Exponer `POST /api/cooked-dishes/:uuid/ratings`.
+- [x] Exponer `GET /api/cooked-dishes/:uuid/ratings` con media, total y distribución.
+- [x] Registrar repositorios y casos de uso en DIOD.
+- [x] Añadir tests unitarios del dominio y los casos de uso.
+- [x] Añadir tests de integración del repositorio PostgreSQL.
+- [x] Cubrir errores: plato inexistente, puntuación inválida y valoración duplicada.
+- [x] Verificar lint, build y tests con `npm prep`.
 
 ### Reparto recomendado
 

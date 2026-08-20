@@ -2,6 +2,10 @@ import "reflect-metadata";
 
 import { ContainerBuilder } from "diod";
 
+import { CookedDishRatingAdder } from "../../../dishes/cooked-dish-ratings/application/add/CookedDishRatingAdder";
+import { CookedDishRatingsSummarizer } from "../../../dishes/cooked-dish-ratings/application/summary/CookedDishRatingsSummarizer";
+import { CookedDishRatingRepository } from "../../../dishes/cooked-dish-ratings/domain/CookedDishRatingRepository";
+import { PostgresCookedDishRatingRepository } from "../../../dishes/cooked-dish-ratings/infrastructure/PostgresCookedDishRatingRepository";
 import { CookedDishCreator } from "../../../dishes/cooked-dishes/application/create/CookedDishCreator";
 import { AllCookedDishesSearcher } from "../../../dishes/cooked-dishes/application/search-all/AllCookedDishesSearcher";
 import { CookedDishByIdSearcher } from "../../../dishes/cooked-dishes/application/search-by-id/CookedDishByIdSearcher";
@@ -73,5 +77,13 @@ builder.registerAndUse(CookedDishCreator);
 builder.registerAndUse(AllCookedDishesSearcher);
 builder.registerAndUse(CookedDishByIdSearcher);
 builder.registerAndUse(CookedDishesBySimilarIngredientsSearcher);
+
+// CookedDishRating
+builder
+	.register(CookedDishRatingRepository)
+	.use(PostgresCookedDishRatingRepository);
+builder.registerAndUse(PostgresCookedDishRatingRepository);
+builder.registerAndUse(CookedDishRatingAdder);
+builder.registerAndUse(CookedDishRatingsSummarizer);
 
 export const container = builder.build();
