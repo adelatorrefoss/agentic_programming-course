@@ -1,0 +1,137 @@
+# Ejemplos de tareas multiagente
+
+Estas tareas están diseñadas para practicar la coordinación entre los tres agentes del proyecto:
+
+- `database-engineer`: esquema PostgreSQL, migraciones, índices y consultas.
+- `backend-engineer`: dominio, casos de uso, repositorios, inyección de dependencias y API.
+- `testing-engineer`: tests unitarios y de integración, Object Mothers y Mock Objects.
+
+## 1. Valoraciones y puntuación de platos cocinados
+
+### Prompt de ejemplo
+
+> Implementa valoraciones de platos cocinados. Delega el diseño de la persistencia en
+> `database-engineer`, el dominio, los casos de uso y las rutas API en `backend-engineer`,
+> y toda la estrategia de pruebas en `testing-engineer`. Coordina el trabajo, revisa la
+> integración entre las partes y ejecuta `npm prep` al terminar.
+
+### Alcance
+
+- [ ] Crear una tabla de valoraciones asociada a `cooked_dishes`.
+- [ ] Guardar autor, puntuación de 1 a 5, comentario y fecha de creación.
+- [ ] Impedir más de una valoración del mismo autor para un mismo plato.
+- [ ] Modelar la valoración y sus invariantes en el dominio.
+- [ ] Crear un caso de uso para añadir una valoración.
+- [ ] Crear un caso de uso para obtener el resumen de valoraciones de un plato.
+- [ ] Exponer `POST /api/cooked-dishes/:uuid/ratings`.
+- [ ] Exponer `GET /api/cooked-dishes/:uuid/ratings` con media, total y distribución.
+- [ ] Registrar repositorios y casos de uso en DIOD.
+- [ ] Añadir tests unitarios del dominio y los casos de uso.
+- [ ] Añadir tests de integración del repositorio PostgreSQL.
+- [ ] Cubrir errores: plato inexistente, puntuación inválida y valoración duplicada.
+- [ ] Verificar lint, build y tests con `npm prep`.
+
+### Reparto recomendado
+
+- `database-engineer`: tablas, restricciones, claves foráneas e índices.
+- `backend-engineer`: agregado, repositorio, casos de uso, DIOD y rutas API finas.
+- `testing-engineer`: Mothers, mocks, tests unitarios e integración PostgreSQL.
+
+## 2. Planificador semanal de comidas y lista de la compra
+
+### Prompt de ejemplo
+
+> Añade un planificador semanal de comidas que permita asignar platos cocinados a días
+> y genere una lista de la compra consolidada. Usa en paralelo `database-engineer`,
+> `backend-engineer` y `testing-engineer`. Haz que cada agente sea responsable de su
+> especialidad y entrega el cambio integrado y validado con `npm prep`.
+
+### Alcance
+
+- [ ] Diseñar la persistencia de planes semanales y sus comidas.
+- [ ] Garantizar que un día y franja (`breakfast`, `lunch`, `dinner`) tengan como máximo un plato.
+- [ ] Modelar `WeeklyMealPlan`, sus identificadores y reglas de negocio.
+- [ ] Crear casos de uso para crear un plan y asignar, sustituir o retirar un plato.
+- [ ] Crear un caso de uso que agrupe ingredientes repetidos en una lista de la compra.
+- [ ] Exponer rutas API para crear, consultar y modificar el plan.
+- [ ] Resolver todas las dependencias mediante DIOD.
+- [ ] Añadir tests de reglas, casos de uso, errores y persistencia.
+- [ ] Comprobar concurrencia al asignar dos platos a la misma franja.
+- [ ] Verificar que las rutas solo coordinan entrada, caso de uso y respuesta HTTP.
+- [ ] Verificar lint, build y tests con `npm prep`.
+
+### Reparto recomendado
+
+- `database-engineer`: esquema relacional, restricciones de unicidad, índices y migraciones.
+- `backend-engineer`: nuevo agregado, servicios de aplicación, repositorios y endpoints.
+- `testing-engineer`: escenarios del agregado, mocks, Mothers y pruebas de integración.
+
+## 3. Búsqueda avanzada y paginada de platos
+
+### Prompt de ejemplo
+
+> Implementa una búsqueda avanzada de platos cocinados por texto, tipos de ingrediente,
+> puntuación mínima y rango de fechas, con ordenación y paginación. Delega el SQL y sus
+> índices en `database-engineer`, la arquitectura y API en `backend-engineer`, y los tests
+> en `testing-engineer`. Pide a los agentes que revisen los contratos compartidos antes
+> de integrar y ejecuta `npm prep`.
+
+### Alcance
+
+- [ ] Definir un objeto de criterios de búsqueda independiente de PostgreSQL.
+- [ ] Añadir filtros combinables, ordenación permitida y paginación con límites seguros.
+- [ ] Diseñar los índices necesarios y justificar cada uno.
+- [ ] Implementar la consulta en `PostgresCookedDishRepository` con parámetros seguros.
+- [ ] Crear el caso de uso de búsqueda sin lógica de negocio en la ruta.
+- [ ] Exponer `GET /api/cooked-dishes` con los nuevos parámetros.
+- [ ] Devolver resultados y metadatos de paginación.
+- [ ] Validar parámetros y responder de forma consistente ante valores inválidos.
+- [ ] Probar filtros aislados, combinaciones, ordenación y límites de página.
+- [ ] Añadir tests de integración que detecten errores en el SQL real.
+- [ ] Verificar lint, build y tests con `npm prep`.
+
+### Reparto recomendado
+
+- `database-engineer`: estrategia SQL, índices y revisión del plan de consulta.
+- `backend-engineer`: criterios de dominio/aplicación, repositorio, caso de uso y API.
+- `testing-engineer`: matriz de casos, datos de prueba y tests unitarios/de integración.
+
+## 4. Historial auditable de cambios en platos
+
+### Prompt de ejemplo
+
+> Implementa un historial auditable para la creación y modificación de platos cocinados.
+> Coordina a `database-engineer`, `backend-engineer` y `testing-engineer`: persistencia y
+> consultas del historial, eventos de dominio y suscriptores, y pruebas de todo el flujo.
+> Evita acoplar el dominio a PostgreSQL y valida el resultado completo con `npm prep`.
+
+### Alcance
+
+- [ ] Crear la persistencia inmutable de eventos de auditoría.
+- [ ] Registrar tipo de cambio, entidad, datos relevantes, autor y fecha.
+- [ ] Publicar eventos de dominio al crear o modificar un plato.
+- [ ] Implementar un suscriptor que transforme esos eventos en entradas de auditoría.
+- [ ] Mantener las rutas API y el agregado libres de detalles de infraestructura.
+- [ ] Crear un caso de uso para consultar el historial de un plato.
+- [ ] Exponer `GET /api/cooked-dishes/:uuid/history`.
+- [ ] Registrar el suscriptor y sus dependencias en DIOD.
+- [ ] Probar serialización, publicación, suscripción y persistencia.
+- [ ] Verificar que un fallo de auditoría tenga el comportamiento transaccional acordado.
+- [ ] Verificar lint, build y tests con `npm prep`.
+
+### Reparto recomendado
+
+- `database-engineer`: modelo append-only, índices y política de integridad.
+- `backend-engineer`: eventos, suscriptor, repositorio de auditoría, caso de uso y API.
+- `testing-engineer`: mocks del bus, pruebas de eventos, suscriptores e integración.
+
+## Criterios comunes de coordinación
+
+- [ ] Antes de programar, acordar contratos entre dominio, repositorios y esquema SQL.
+- [ ] Permitir trabajo paralelo solo cuando esos contratos estén definidos.
+- [ ] No colocar reglas de negocio en rutas API ni implementaciones PostgreSQL.
+- [ ] Añadir `import "reflect-metadata"` como primer import de cada nueva ruta API.
+- [ ] Decorar los servicios inyectables con `@Service()` y registrarlos en DIOD.
+- [ ] Mantener las convenciones existentes para Mothers y mocks.
+- [ ] Hacer que el agente principal revise el diff integrado, no solo los resultados aislados.
+- [ ] Considerar terminada una tarea únicamente cuando `npm prep` pase correctamente.
