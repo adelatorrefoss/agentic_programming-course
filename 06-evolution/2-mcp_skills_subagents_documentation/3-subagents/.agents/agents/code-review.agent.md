@@ -25,6 +25,9 @@ Review the complete commit range, not isolated agent outputs.
    changes in a remediation commit and records the result in the task
    coordination record.
 
+The integrating agent must use a remediation commit message beginning with
+`code-review:`.
+
 ## Constraints
 
 - Do not modify production code, tests, CI, or agent configuration.

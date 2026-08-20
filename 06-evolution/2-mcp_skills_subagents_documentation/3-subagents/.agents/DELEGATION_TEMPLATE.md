@@ -35,7 +35,7 @@ Shared contracts must be explicit before parallel work begins:
 - Implementation commit:
 - PR code review commit range:
 - Code review agent result:
-- Remediation commit:
+- Remediation commit (`code-review:`):
 - Post-remediation validation commands and results:
 - Harness retro report:
 - Harness retro commit:

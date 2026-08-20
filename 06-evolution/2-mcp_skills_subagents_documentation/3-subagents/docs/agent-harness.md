@@ -55,7 +55,8 @@ The agent may update that TODO file, but it must not modify production code or C
 3. Integrate and validate the complete diff.
 4. Commit the implementation and open or identify the PR commit range.
 5. Execute `code-review` as the PR review of the implementation commit.
-6. Apply accepted findings and commit the remediation changes.
+6. Apply accepted findings and commit the remediation changes with a message
+   starting with `code-review:`.
 7. Run the required project checks after remediation.
 8. Execute `harness-retro`, update the harness TODO register, and commit the
    retrospective separately.
