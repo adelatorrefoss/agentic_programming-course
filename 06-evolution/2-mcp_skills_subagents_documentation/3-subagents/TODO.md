@@ -6,7 +6,7 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - `backend-engineer`: dominio, casos de uso, repositorios, inyección de dependencias y API.
 - `testing-engineer`: tests unitarios y de integración, Object Mothers y Mock Objects.
 
-## 1. Valoraciones y puntuación de platos cocinados
+## TAREA_001. Valoraciones y puntuación de platos cocinados
 
 ### Prompt de ejemplo
 
@@ -37,7 +37,7 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - `backend-engineer`: agregado, repositorio, casos de uso, DIOD y rutas API finas.
 - `testing-engineer`: Mothers, mocks, tests unitarios e integración PostgreSQL.
 
-## 2. Planificador semanal de comidas y lista de la compra
+## TAREA_002. Planificador semanal de comidas y lista de la compra
 
 ### Prompt de ejemplo
 
@@ -66,7 +66,7 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - `backend-engineer`: nuevo agregado, servicios de aplicación, repositorios y endpoints.
 - `testing-engineer`: escenarios del agregado, mocks, Mothers y pruebas de integración.
 
-## 3. Búsqueda avanzada y paginada de platos
+## TAREA_003. Búsqueda avanzada y paginada de platos
 
 ### Prompt de ejemplo
 
@@ -96,7 +96,7 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - `backend-engineer`: criterios de dominio/aplicación, repositorio, caso de uso y API.
 - `testing-engineer`: matriz de casos, datos de prueba y tests unitarios/de integración.
 
-## 4. Historial auditable de cambios en platos
+## TAREA_004. Historial auditable de cambios en platos
 
 ### Prompt de ejemplo
 
@@ -135,3 +135,4 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - [ ] Mantener las convenciones existentes para Mothers y mocks.
 - [ ] Hacer que el agente principal revise el diff integrado, no solo los resultados aislados.
 - [ ] Considerar terminada una tarea únicamente cuando `npm prep` pase correctamente.
+ - [ ] Invocar `harness-retro` tras finalizar cada tarea para generar retros y propuestas de parche de configuración (NO aplicar cambios en código de producción).
