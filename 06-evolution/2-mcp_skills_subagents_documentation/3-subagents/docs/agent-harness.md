@@ -25,6 +25,23 @@ The least-privilege role matrix is maintained in
 `.agents/agent-tool-matrix.conf`; `npm run agents:validate` rejects a
 definition whose tools differ from its matrix entry.
 
+## Commit messages
+
+Every task commit must include its task identifier in the subject:
+
+```text
+feat TASK_XXX: describe the implementation
+```
+
+Use the matching phase prefix for follow-up commits:
+
+```text
+code-review TASK_XXX: apply PR review findings
+chore TASK_XXX: record harness retro
+```
+
+Replace `TASK_XXX` with the actual task identifier, such as `TASK_002`.
+
 ## Coordination best practices
 
 - Define shared contracts before starting parallel work.
