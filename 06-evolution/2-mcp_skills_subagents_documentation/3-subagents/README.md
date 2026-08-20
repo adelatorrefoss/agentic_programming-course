@@ -5,6 +5,7 @@
 4. `npm run consume-rabbitmq`
 5. `npm run insert-duplicate-events -- 100`
 
-## Test harness
+## Harnesses
 
-See [`docs/harness.md`](docs/harness.md) for PostgreSQL and Ollama prerequisites, healthchecks, cache policy, and no-cache validation.
+- Agent harness and agent configuration: [`docs/agent-harness.md`](docs/agent-harness.md).
+- Test infrastructure and external test services: [`docs/test-infrastructure.md`](docs/test-infrastructure.md).

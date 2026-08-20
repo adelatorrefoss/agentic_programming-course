@@ -1,4 +1,4 @@
-# Test harness
+# Test infrastructure
 
 The integration and repository tests require PostgreSQL and Ollama.
 
