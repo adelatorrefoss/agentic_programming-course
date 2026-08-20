@@ -1,9 +1,10 @@
 # Ejemplos de tareas multiagente
 
-Estas tareas están diseñadas para practicar la coordinación entre los tres agentes del proyecto:
+Estas tareas están diseñadas para practicar la coordinación entre los cuatro agentes del proyecto:
 
 - `database-engineer`: esquema PostgreSQL, migraciones, índices y consultas.
 - `backend-engineer`: dominio, casos de uso, repositorios, inyección de dependencias y API.
+- `frontend-engineer`: páginas, componentes React, estado de UI e integración con la API.
 - `testing-engineer`: tests unitarios y de integración, Object Mothers y Mock Objects.
 
 ## TASK-001. Valoraciones y puntuación de platos cocinados
@@ -12,8 +13,9 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 
 > Implementa valoraciones de platos cocinados. Delega el diseño de la persistencia en
 > `database-engineer`, el dominio, los casos de uso y las rutas API en `backend-engineer`,
-> y toda la estrategia de pruebas en `testing-engineer`. Coordina el trabajo, revisa la
-> integración entre las partes y ejecuta `npm prep` al terminar.
+> la interfaz de valoración en `frontend-engineer` y toda la estrategia de pruebas en
+> `testing-engineer`. Coordina el trabajo, revisa la integración entre las partes y
+> ejecuta `npm prep` al terminar.
 
 ### Alcance
 
@@ -29,12 +31,16 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - [x] Añadir tests unitarios del dominio y los casos de uso.
 - [x] Añadir tests de integración del repositorio PostgreSQL.
 - [x] Cubrir errores: plato inexistente, puntuación inválida y valoración duplicada.
+- [x] Mostrar el resumen, la media y la distribución de valoraciones en la interfaz.
+- [x] Permitir enviar una valoración desde la interfaz con puntuación y comentario.
+- [x] Mostrar estados de carga, éxito y error al gestionar valoraciones.
 - [x] Verificar lint, build y tests con `npm prep`.
 
 ### Reparto recomendado
 
 - `database-engineer`: tablas, restricciones, claves foráneas e índices.
 - `backend-engineer`: agregado, repositorio, casos de uso, DIOD y rutas API finas.
+- `frontend-engineer`: componentes de valoración, estado de UI e integración con las rutas.
 - `testing-engineer`: Mothers, mocks, tests unitarios e integración PostgreSQL.
 
 ## TASK-002. Planificador semanal de comidas y lista de la compra
@@ -43,8 +49,8 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 
 > Añade un planificador semanal de comidas que permita asignar platos cocinados a días
 > y genere una lista de la compra consolidada. Usa en paralelo `database-engineer`,
-> `backend-engineer` y `testing-engineer`. Haz que cada agente sea responsable de su
-> especialidad y entrega el cambio integrado y validado con `npm prep`.
+> `backend-engineer`, `frontend-engineer` y `testing-engineer`. Haz que cada agente sea
+> responsable de su especialidad y entrega el cambio integrado y validado con `npm prep`.
 
 ### Alcance
 
@@ -58,12 +64,16 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - [x] Añadir tests de reglas, casos de uso, errores y persistencia.
 - [x] Comprobar concurrencia al asignar dos platos a la misma franja.
 - [x] Verificar que las rutas solo coordinan entrada, caso de uso y respuesta HTTP.
+- [x] Crear una vista semanal para consultar y gestionar las comidas planificadas.
+- [x] Permitir asignar, sustituir y retirar platos desde la interfaz.
+- [x] Mostrar la lista de la compra consolidada con sus estados de carga y error.
 - [x] Verificar lint, build y tests con `npm prep`.
 
 ### Reparto recomendado
 
 - `database-engineer`: esquema relacional, restricciones de unicidad, índices y migraciones.
 - `backend-engineer`: nuevo agregado, servicios de aplicación, repositorios y endpoints.
+- `frontend-engineer`: calendario semanal, interacción de comidas y lista de la compra.
 - `testing-engineer`: escenarios del agregado, mocks, Mothers y pruebas de integración.
 
 ## TASK-003. Búsqueda avanzada y paginada de platos
@@ -72,9 +82,9 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 
 > Implementa una búsqueda avanzada de platos cocinados por texto, tipos de ingrediente,
 > puntuación mínima y rango de fechas, con ordenación y paginación. Delega el SQL y sus
-> índices en `database-engineer`, la arquitectura y API en `backend-engineer`, y los tests
-> en `testing-engineer`. Pide a los agentes que revisen los contratos compartidos antes
-> de integrar y ejecuta `npm prep`.
+> índices en `database-engineer`, la arquitectura y API en `backend-engineer`, la interfaz
+> de búsqueda en `frontend-engineer` y los tests en `testing-engineer`. Pide a los agentes
+> que revisen los contratos compartidos antes de integrar y ejecuta `npm prep`.
 
 ### Alcance
 
@@ -86,6 +96,8 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - [ ] Exponer `GET /api/cooked-dishes` con los nuevos parámetros.
 - [ ] Devolver resultados y metadatos de paginación.
 - [ ] Validar parámetros y responder de forma consistente ante valores inválidos.
+- [ ] Crear controles de filtros, ordenación y paginación en la interfaz.
+- [ ] Mostrar resultados, metadatos y estados de carga o error de la búsqueda.
 - [ ] Probar filtros aislados, combinaciones, ordenación y límites de página.
 - [ ] Añadir tests de integración que detecten errores en el SQL real.
 - [ ] Verificar lint, build y tests con `npm prep`.
@@ -94,6 +106,7 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 
 - `database-engineer`: estrategia SQL, índices y revisión del plan de consulta.
 - `backend-engineer`: criterios de dominio/aplicación, repositorio, caso de uso y API.
+- `frontend-engineer`: filtros, resultados paginados y estados de la interfaz.
 - `testing-engineer`: matriz de casos, datos de prueba y tests unitarios/de integración.
 
 ## TASK-004. Historial auditable de cambios en platos
@@ -101,9 +114,10 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 ### Prompt de ejemplo
 
 > Implementa un historial auditable para la creación y modificación de platos cocinados.
-> Coordina a `database-engineer`, `backend-engineer` y `testing-engineer`: persistencia y
-> consultas del historial, eventos de dominio y suscriptores, y pruebas de todo el flujo.
-> Evita acoplar el dominio a PostgreSQL y valida el resultado completo con `npm prep`.
+> Coordina a `database-engineer` para la persistencia, `backend-engineer` para los eventos,
+> suscriptores, caso de uso y API, `frontend-engineer` para la interfaz de consulta, y
+> `testing-engineer` para las pruebas de todo el flujo. Evita acoplar el dominio a
+> PostgreSQL y valida el resultado completo con `npm prep`.
 
 ### Alcance
 
@@ -115,6 +129,8 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 - [ ] Crear un caso de uso para consultar el historial de un plato.
 - [ ] Exponer `GET /api/cooked-dishes/:uuid/history`.
 - [ ] Registrar el suscriptor y sus dependencias en DIOD.
+- [ ] Crear una vista de historial con cambios ordenados cronológicamente.
+- [ ] Mostrar los detalles de cada cambio y sus estados de carga o error.
 - [ ] Probar serialización, publicación, suscripción y persistencia.
 - [ ] Verificar que un fallo de auditoría tenga el comportamiento transaccional acordado.
 - [ ] Verificar lint, build y tests con `npm prep`.
@@ -123,6 +139,7 @@ Estas tareas están diseñadas para practicar la coordinación entre los tres ag
 
 - `database-engineer`: modelo append-only, índices y política de integridad.
 - `backend-engineer`: eventos, suscriptor, repositorio de auditoría, caso de uso y API.
+- `frontend-engineer`: vista cronológica, detalle de cambios e integración con la API.
 - `testing-engineer`: mocks del bus, pruebas de eventos, suscriptores e integración.
 
 ## Criterios comunes de coordinación
